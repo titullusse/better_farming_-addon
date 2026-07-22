@@ -17,6 +17,23 @@ récolte à rayon fixe par une boucle dont le rayon est lu depuis un fichier de
 configuration. La logique de récolte (drop des cultures, remise à zéro, collecte
 des objets dans le coffre) est reproduite à l'identique, seul le rayon change.
 
+La zone de collecte des objets est centrée sur le coffre et couvre un bloc de
+plus que le rayon de récolte, afin que les objets récoltés en bordure de zone
+soient bien ramassés.
+
+Ce module ne s'exécute que **côté serveur** : la récolte, les drops et le
+remplissage du coffre sont calculés sur le serveur (ou le serveur intégré en
+solo), puis synchronisés normalement vers les clients.
+
+## Écran de configuration en jeu
+
+L'addon enregistre l'écran de configuration intégré de NeoForge. Avec un mod
+de type **Mod Menu** pour NeoForge (par exemple
+[Better ModList](https://modrinth.com/mod/better-modlist) ou
+[Neo Mod Menu](https://github.com/1foxy2/neo_mod_menu)) installé, un bouton
+**config** apparaît à côté de ce mod dans la liste des mods, permettant de
+modifier `harvest_radius` directement en jeu sans éditer le fichier `.toml`.
+
 ## Configuration
 
 Fichier généré : `config/better_farming_radius-common.toml`
