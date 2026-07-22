@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"minVersion": "0.8.5",
+	"package": "tn.titullusse.betterfarmingradius.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"FarmingCrateOnTickUpdateMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
