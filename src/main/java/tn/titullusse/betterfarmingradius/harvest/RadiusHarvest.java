@@ -64,8 +64,11 @@ public final class RadiusHarvest {
 	}
 
 	private static void collectDropsIntoCrate(LevelAccessor world, double x, double y, double z, int radius) {
-		final Vec3 center = new Vec3(x, y, z);
-		double reach = Math.max(radius, 1);
+		// Center the pickup box on the crate block's center, and reach one block
+		// past the harvest radius so drops at the far edge (which spawn around
+		// edge + 0.5) and any that bounce outward are still collected.
+		final Vec3 center = new Vec3(x + 0.5, y + 0.5, z + 0.5);
+		double reach = radius + 1;
 		List<Entity> entities = world
 				.getEntitiesOfClass(Entity.class, new AABB(center, center).inflate(reach), e -> true).stream()
 				.sorted(Comparator.comparingDouble(e -> e.distanceToSqr(center))).toList();
