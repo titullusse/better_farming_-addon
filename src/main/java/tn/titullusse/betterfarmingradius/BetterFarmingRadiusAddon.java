@@ -3,11 +3,14 @@ package tn.titullusse.betterfarmingradius;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.loading.FMLEnvironment;
 
+import tn.titullusse.betterfarmingradius.client.ClientConfigScreen;
 import tn.titullusse.betterfarmingradius.config.RadiusAddonConfig;
 
 /**
@@ -25,6 +28,13 @@ public class BetterFarmingRadiusAddon {
 
 	public BetterFarmingRadiusAddon(IEventBus modEventBus, ModContainer modContainer) {
 		modContainer.registerConfig(ModConfig.Type.COMMON, RadiusAddonConfig.SPEC);
+
+		// Only reference client-only classes on the physical client, so a
+		// dedicated server never has to load them.
+		if (FMLEnvironment.dist == Dist.CLIENT) {
+			ClientConfigScreen.register(modContainer);
+		}
+
 		LOGGER.info("Better Farming ++ configurable crate radius addon loaded.");
 	}
 }
